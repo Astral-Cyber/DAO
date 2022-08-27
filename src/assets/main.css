@@ -1,10 +1,31 @@
 @import "./base.css";
 
-#app{
+#app {
     min-height: 100vh;
     overflow: hidden;
 }
-:root {
+
+.el-menu-header {
     --el-menu-active-color: #FF9671 !important;
-    --el-menu-hover-text-color:  #FF9671 !important;
+    --el-menu-hover-text-color: #FF9671 !important;
+    --el-menu-text-color: #777777 !important;
+}
+
+.item {
+    --el-menu-hover-bg-color: rgba(255, 255, 255, .0) !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FF9671;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #eee;
 }

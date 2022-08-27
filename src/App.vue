@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {RouterLink, RouterView} from 'vue-router'
 import {ElNotification} from 'element-plus'
-import {h, ref} from 'vue'
+import { h, ref} from 'vue'
 
 const avatar = "https://avatars.githubusercontent.com/u/72015883?v=4"
 const findMe = "https://github.com/Astral-Cyber"
@@ -13,6 +13,7 @@ window.onload = function () {
     showClose: false,
   })
 }
+
 </script>
 
 <template>
@@ -24,7 +25,7 @@ window.onload = function () {
         :ellipsis="false"
         router="router"
         default-active="/"
-        background-color="rgba(255,255,255,.7)"
+        background-color="rgba(255,255,255,.8)"
     >
       <el-popover
           :width="200"
@@ -40,7 +41,7 @@ window.onload = function () {
             </el-col>
             <el-col :span="14">
               <div style="margin-top: 14px;margin-left: 2px">
-                <p style="margin: 0; font-weight: 500;">思量DAO(岛)</p>
+                <p style="margin: 0; font-weight: 500;">思量DAO</p>
                 <el-link type="info" :href="findMe">@AstralCyber</el-link>
               </div>
             </el-col>
@@ -56,19 +57,22 @@ window.onload = function () {
           首页
         </el-menu-item>
 
-        <el-menu-item index="/assort" class="item">
+        <el-menu-item index="/assort" class="item" disabled>
           <el-icon>
             <MessageBox/>
           </el-icon>
           归档
         </el-menu-item>
-        <el-menu-item index="/about" class="item">
+        <el-menu-item index="/about" class="item" disabled>
           <el-icon>
             <Connection/>
           </el-icon>
           关于博客
         </el-menu-item>
 
+      <a :href="findMe" style="position: absolute;right: 10px;top: 12px;width: 30px">
+      <img style="width: 100%" src="src/assets/github.svg"/>
+      </a>
     </el-menu>
   </el-affix>
   <RouterView/>

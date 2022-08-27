@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {RouterLink, RouterView} from 'vue-router'
 import {ElNotification} from 'element-plus'
-import {h} from 'vue'
+import {h, ref} from 'vue'
 
 const avatar = "https://avatars.githubusercontent.com/u/72015883?v=4"
 const findMe = "https://github.com/Astral-Cyber"
@@ -16,13 +16,15 @@ window.onload = function () {
 </script>
 
 <template>
-  <el-affix target=".main-container">
+
+  <el-affix>
     <el-menu
         class="el-menu-header"
         mode="horizontal"
         :ellipsis="false"
         router="router"
         default-active="/"
+        background-color="rgba(255,255,255,.7)"
     >
       <el-popover
           :width="200"
@@ -45,28 +47,31 @@ window.onload = function () {
           </el-row>
         </template>
       </el-popover>
-
       <div class="flex-grow"/>
-      <el-menu-item index="/" class="item">首页</el-menu-item>
-      <el-menu-item index="/assort" class="item">归档</el-menu-item>
-      <el-menu-item index="/about" class="item">关于博客</el-menu-item>
-      <!--    <el-sub-menu index="2">-->
-      <!--      <template #title>Workspace</template>-->
-      <!--      <el-menu-item index="2-1">item one</el-menu-item>-->
-      <!--      <el-menu-item index="2-2">item two</el-menu-item>-->
-      <!--      <el-menu-item index="2-3">item three</el-menu-item>-->
-      <!--      <el-sub-menu index="2-4">-->
-      <!--        <template #title>item four</template>-->
-      <!--        <el-menu-item index="2-4-1">item one</el-menu-item>-->
-      <!--        <el-menu-item index="2-4-2">item two</el-menu-item>-->
-      <!--        <el-menu-item index="2-4-3">item three</el-menu-item>-->
-      <!--      </el-sub-menu>-->
-      <!--    </el-sub-menu>-->
+
+        <el-menu-item index="/" class="item">
+          <el-icon>
+            <House/>
+          </el-icon>
+          首页
+        </el-menu-item>
+
+        <el-menu-item index="/assort" class="item">
+          <el-icon>
+            <MessageBox/>
+          </el-icon>
+          归档
+        </el-menu-item>
+        <el-menu-item index="/about" class="item">
+          <el-icon>
+            <Connection/>
+          </el-icon>
+          关于博客
+        </el-menu-item>
+
     </el-menu>
   </el-affix>
-  <el-scrollbar height="100vh" wrap-class="main-container">
-    <RouterView/>
-  </el-scrollbar>
+  <RouterView/>
 </template>
 
 <style scoped>
@@ -77,5 +82,17 @@ window.onload = function () {
 .item {
   font-weight: bold;
   font-size: large;
+}
+
+.el-menu-header {
+  z-index: 1;
+  border: none;
+  box-shadow: none;
+  transition: background-color 0.75s, box-shadow 0.75s;
+}
+
+.el-menu-header:hover {
+  background-color: white;
+  box-shadow: 0 1px 40px -8px rgb(0 0 0 / 50%);
 }
 </style>

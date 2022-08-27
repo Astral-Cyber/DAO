@@ -1,6 +1,10 @@
 @import "./base.css";
 
 #app{
-    max-height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+}
+:root {
+    --el-menu-active-color: #FF9671 !important;
+    --el-menu-hover-text-color:  #FF9671 !important;
 }

@@ -18,7 +18,7 @@
     </el-header>
     <el-main>
       <el-container>
-        <el-aside width="15vw">
+        <el-aside class="side" width="15vw">
           <el-empty description="description" />
         </el-aside>
         <el-main>
@@ -34,7 +34,7 @@
 
 
         </el-main>
-        <el-aside width="15vw">
+        <el-aside class="side" width="15vw">
           <el-empty description="description" />
         </el-aside>
       </el-container>
@@ -49,5 +49,9 @@
   </el-container>
 </template>
 <style>
-
+@media screen and (max-width: 1070px){
+.side{
+  display: none;
+}
+}
 </style>

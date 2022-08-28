@@ -1,7 +1,8 @@
-<script lang="ts" setup>
+<script setup>
 import {RouterLink, RouterView} from 'vue-router'
 import {ElNotification} from 'element-plus'
-import { h, ref} from 'vue'
+import {h, ref} from 'vue'
+
 
 const avatar = "https://avatars.githubusercontent.com/u/72015883?v=4"
 const findMe = "https://github.com/Astral-Cyber"
@@ -9,22 +10,23 @@ const findMe = "https://github.com/Astral-Cyber"
 window.onload = function () {
   ElNotification({
     title: 'Welcome',
-    message: h('i', {style: 'color: teal'}, '欢迎来到思量DAO'),
+    message: '<span>欢迎来到思量DAO</span>' +'<span>丨</span>'+
+        '<span>一念情似海•一念缘随风</span>',
     showClose: false,
+    duration: 3500,
+    dangerouslyUseHTMLString: true,
   })
 }
 
 </script>
 
 <template>
-
   <el-affix>
     <el-menu
         class="el-menu-header"
         mode="horizontal"
         :ellipsis="false"
         router="router"
-        default-active="/"
         background-color="rgba(255,255,255,.8)"
     >
       <el-popover
@@ -50,32 +52,53 @@ window.onload = function () {
       </el-popover>
       <div class="flex-grow"/>
 
-        <el-menu-item index="/" class="item">
-          <el-icon>
-            <House/>
-          </el-icon>
-          首页
-        </el-menu-item>
+      <el-menu-item index="/" class="item">
+        <el-icon>
+          <House/>
+        </el-icon>
+        首页
+      </el-menu-item>
 
-        <el-menu-item index="/assort" class="item" disabled>
-          <el-icon>
-            <MessageBox/>
-          </el-icon>
-          归档
-        </el-menu-item>
-        <el-menu-item index="/about" class="item" disabled>
-          <el-icon>
-            <Connection/>
-          </el-icon>
-          关于博客
-        </el-menu-item>
+      <el-menu-item index="/assort" class="item" disabled>
+        <el-icon>
+          <MessageBox/>
+        </el-icon>
+        归档
+      </el-menu-item>
+      <el-menu-item index="/about" class="item">
+        <el-icon>
+          <Connection/>
+        </el-icon>
+        关于博客
+      </el-menu-item>
 
-      <a :href="findMe" style="position: absolute;right: 10px;top: 12px;width: 30px">
-      <img style="width: 100%" src="src/assets/github.svg"/>
+      <a :href="findMe" style="position: absolute;right: 10px;top: 13px;width: 30px">
+        <img style="width: 100%" src="src/assets/github.svg"/>
       </a>
     </el-menu>
   </el-affix>
-  <RouterView/>
+
+  <router-view v-slot="{ Component }" style="margin-top: -59px">
+    <transition name="fade" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
+
+  <el-divider
+      border-style="none"
+      style="width: 65vw; margin: 20px auto 30px;">
+    <el-icon class="rotate" :size="24" style="margin: auto">
+      <Sunny/>
+    </el-icon>
+  </el-divider>
+
+  <el-divider
+      border-style="none"
+      style="width: 65vw; margin: auto auto 20px;">
+    <span style="color: #b8b9b9;">
+      &copy;2022 思量DAO • By 奉眠
+    </span>
+  </el-divider>
 </template>
 
 <style scoped>
@@ -98,5 +121,32 @@ window.onload = function () {
 .el-menu-header:hover {
   background-color: white;
   box-shadow: 0 1px 40px -8px rgb(0 0 0 / 50%);
+}
+
+.fade-enter-active,
+.fade-leave-active{
+  transition: opacity 0.5s;
+  transition-timing-function: ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to{
+  opacity: 0;
+}
+
+.rotate {
+  animation: myRotate 12s linear infinite;
+}
+
+@keyframes myRotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 </style>

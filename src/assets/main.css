@@ -5,14 +5,24 @@
     overflow: hidden;
 }
 
+.el-notification.right{
+    width: 336px !important;
+}
+
 .el-menu-header {
     --el-menu-active-color: #FF9671 !important;
     --el-menu-hover-text-color: #FF9671 !important;
     --el-menu-text-color: #777777 !important;
 }
 
-.item {
+.item{
     --el-menu-hover-bg-color: rgba(255, 255, 255, .0) !important;
+}
+.el-menu-item.is-active{
+    border-bottom: rgba(255, 255, 255, .0) !important;
+}
+#articleBody{
+    --el-main-padding: 10px !important;
 }
 
 ::-webkit-scrollbar {

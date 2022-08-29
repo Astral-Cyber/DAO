@@ -3,7 +3,6 @@ import {RouterLink, RouterView} from 'vue-router'
 import {ElNotification} from 'element-plus'
 import {h, ref} from 'vue'
 
-
 const avatar = "https://avatars.githubusercontent.com/u/72015883?v=4"
 const findMe = "https://github.com/Astral-Cyber"
 
@@ -13,7 +12,7 @@ window.onload = function () {
     message: '<span>欢迎来到思量DAO</span>' +'<span>丨</span>'+
         '<span>一念情似海•一念缘随风</span>',
     showClose: false,
-    duration: 3500,
+    duration: 4000,
     dangerouslyUseHTMLString: true,
   })
 }
@@ -21,7 +20,7 @@ window.onload = function () {
 </script>
 
 <template>
-  <el-affix>
+  <el-affix style="width: 100vw">
     <el-menu
         class="el-menu-header"
         mode="horizontal"

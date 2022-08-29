@@ -12,6 +12,9 @@
     "@element-plus/icons-vue": "^2.0.9",
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
+    "github-markdown-css": "^5.1.0",
+    "highlight.js": "^11.6.0",
+    "marked": "^4.0.19",
     "vue": "^3.2.37",
     "vue-axios": "^3.4.1",
     "vue-router": "^4.1.3"

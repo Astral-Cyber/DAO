@@ -1,5 +1,6 @@
 <template>
   <el-container style="">
+    <!--首屏展示图-->
     <el-header style="height: 100vh;
     background-image: url(https://source.unsplash.com/random/1600x800/?wallpaper);
     background-position: center center;
@@ -14,11 +15,12 @@
     </el-header>
     <el-main>
       <el-container>
-        <el-aside class="side" width="20vw" style="border:1px solid red;">
+        <!--主页左侧-->
+        <el-aside class="side" width="25vw">
           <el-empty description="description"/>
         </el-aside>
+        <!--主页中心-->
         <el-main id="articleBody">
-
           <el-row>
             <el-icon :size="20" style="color: #E57B89;margin-top: 4.5px">
               <Reading/>
@@ -29,16 +31,50 @@
 
           <!-- 文章列表-->
           <div v-for="article in tableData">
-              <el-row @click="$router.push({ name: 'article', params: { id: article.id }})" style="cursor:pointer;">
-                <el-col :span="24" style="margin-top: 10px;margin-bottom: 5px">
-                  <el-card shadow="hover">
-                    <el-empty description="description"/>
-                  </el-card>
-                </el-col>
-              </el-row>
+            <el-row @click="$router.push({ name: 'article', params: { url: article.url }})" style="cursor:pointer;">
+              <el-col :span="24" style="margin-bottom: 20px">
+                <el-card class="articleCard">
+                  <el-row>
+                    <el-col :span="11" style="padding: 20px">
+                      <h1 style="top: 0px; color: #666666;font-weight: bolder;font-size: 20px;
+                      word-break:break-all;
+                        word-wrap:break-word">{{ article.topic }}</h1>
+                      <div style="height: 150px;">
+                        <span style="color: #777777;width:100%;
+                        display:block;
+                        white-space:pre-wrap;
+                        word-break:break-all;
+                        word-wrap:break-word;
+                        overflow:hidden;">{{article.intro}}</span>
+                      </div>
+                      <span style="color: #777777;font-size: small;bottom: 20px;position: absolute;width: 100%">
+                        <el-row>
+                         <el-col :span="12">
+                           <el-icon style="top: 2px">
+                             <Paperclip/>
+                           </el-icon>
+                           发布于{{ article.releaseDate }}
+                         </el-col>
+                          <el-col :span="12">
+                           <el-icon style="top: 2px">
+                             <Folder/>
+                           </el-icon>
+                           分类：{{ article.as.name }}
+                         </el-col>
+                        </el-row>
+                      </span>
+                    </el-col>
+                    <el-col :span="13" class="articleImgBox">
+                      <img :src="articleImg(article.id)" class="articleImg">
+                    </el-col>
+                  </el-row>
+                </el-card>
+              </el-col>
+            </el-row>
           </div>
         </el-main>
-        <el-aside class="side" width="20vw" style="border:1px solid red;">
+        <!--主页右侧-->
+        <el-aside class="side" width="25vw">
           <el-empty description="description"/>
         </el-aside>
       </el-container>
@@ -50,13 +86,24 @@
 import axios from "axios";
 import {onBeforeMount, onMounted, ref} from "vue";
 
-const tableData = ref([{name: 55,}])
+const tableData = ref(null)
 
 onBeforeMount(() => {
   axios.get("api/show").then(function (res) {
     tableData.value = res.data;
   })
 })
+
+function articleImg(id) {
+  // let url;
+  // await axios.get('https://api.unsplash.com/photos/random?client_id=TYItb6qDXZniRVRgxRVHDym6xMgGUd35Ae4o0bbqq_0')
+  //     .then(function (res) {
+  //       console.log(res.data.urls.full);
+  //       url = res.data.urls.full;
+  //     }.bind(this));
+  // return url;
+  return 'https://source.unsplash.com/random/800x800/?' + id + ')';
+}
 
 </script>
 

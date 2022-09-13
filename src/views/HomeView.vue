@@ -1,10 +1,11 @@
-<script setup lang="ts">
-import Home from '../components/Home.vue'
+<template>
+
+</template>
+
+<script>
+
 </script>
 
-<template>
-  <Home />
-</template>
-<style>
+<style scoped>
 
 </style>

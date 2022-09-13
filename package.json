@@ -2,7 +2,7 @@
   "name": "astral",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite --host 0.0.0.0 --port 8090",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.9",
+    "@kangc/v-md-editor": "^2.3.15",
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
     "github-markdown-css": "^5.1.0",

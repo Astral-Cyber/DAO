@@ -2,12 +2,14 @@
   <el-container style="">
     <!--首屏展示图-->
     <el-header style="height: 100vh;
-    background-image: url(https://source.unsplash.com/random/1600x800/?wallpaper);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    z-index: -1">
+    z-index: -1"
+               :style="{
+      'background-image': 'url(' + imgApi + ')'
+    }">
       <el-icon :size="40" color="rgba(255,255,255,.7)"
                style="z-index: 1; position: absolute;bottom: 10vh;right: 49vw">
         <SortDown/>
@@ -31,12 +33,12 @@
 
           <!-- 文章列表-->
           <div v-for="article in tableData">
-            <el-row @click="$router.push({ name: 'article', params: { url: article.url }})" style="cursor:pointer;">
+            <el-row @click="$router.push({ name: 'art', params: { url: article.url }})" style="cursor:pointer;">
               <el-col :span="24" style="margin-bottom: 20px">
                 <el-card class="articleCard">
                   <el-row>
                     <el-col :span="11" style="padding: 20px">
-                      <h1 style="top: 0px; color: #666666;font-weight: bolder;font-size: 20px;
+                      <h1 style="top: 0; color: #666666;font-weight: bolder;font-size: 20px;
                       word-break:break-all;
                         word-wrap:break-word">{{ article.topic }}</h1>
                       <div style="height: 150px;">
@@ -45,7 +47,7 @@
                         white-space:pre-wrap;
                         word-break:break-all;
                         word-wrap:break-word;
-                        overflow:hidden;">{{article.intro}}</span>
+                        overflow:hidden;">{{ article.intro }}</span>
                       </div>
                       <span style="color: #777777;font-size: small;bottom: 20px;position: absolute;width: 100%">
                         <el-row>
@@ -86,6 +88,7 @@
 import axios from "axios";
 import {onBeforeMount, onMounted, ref} from "vue";
 
+let imgApi = 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 const tableData = ref(null)
 
 onBeforeMount(() => {
@@ -102,7 +105,7 @@ function articleImg(id) {
   //       url = res.data.urls.full;
   //     }.bind(this));
   // return url;
-  return 'https://source.unsplash.com/random/800x800/?' + id + ')';
+  return imgApi + '?' + id + ')';
 }
 
 </script>

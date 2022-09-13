@@ -2,7 +2,8 @@
   <el-container style="top: 59px;margin-bottom: 80px">
     <el-aside width="20vw"></el-aside>
     <el-main>
-      <div v-html="article" class="markdown-body"></div>
+<!--      @copy-code-success="handleCopyCodeSuccess"-->
+      <v-md-preview :text="article" @copy-code-success="handleCopyCodeSuccess"></v-md-preview>
     </el-main>
     <el-aside width="20vw"></el-aside>
   </el-container>
@@ -20,27 +21,31 @@ import {useRoute} from 'vue-router'
 const route = useRoute()
 const article = ref('');
 
+function handleCopyCodeSuccess() {
+  console.log("copy");
+}
+
 onMounted(() => {
-  var rendererMD = new marked.Renderer();
-  let url='http://localhost:5173/src/assets/'+ route.params.url +'.md';
-  marked.setOptions({
-    renderer: rendererMD,
-    highlight: function(code) {
-      return hljs.highlightAuto(code).value;
-    },
-    pedantic: false,
-    gfm: true,
-    tables: true,
-    breaks: false,
-    sanitize: false,
-    smartLists: true,
-    smartypants: false,
-    xhtml: false,
-  })
+  // var rendererMD = new marked.Renderer();
+  let url='/article/'+ route.params.url +'.md';
+  // marked.setOptions({
+  //   renderer: rendererMD,
+  //   highlight: function(code) {
+  //     return hljs.highlightAuto(code).value;
+  //   },
+  //   pedantic: false,
+  //   gfm: true,
+  //   tables: true,
+  //   breaks: false,
+  //   sanitize: false,
+  //   smartLists: true,
+  //   smartypants: false,
+  //   xhtml: false,
+  // })
   axios.get(url)
       .then(function (res) {
-        var Md2html=marked(res.data)
-        article.value = Md2html
+        // var Md2html=marked(res.data)
+        article.value = res.data
         console.log(article.value);
       })
 })

@@ -28,6 +28,14 @@ export default defineConfig({
         target: 'http://localhost:8080',
         changeOrigin: true,
       },
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      },
+      '/article': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      }
     }
   }
 })

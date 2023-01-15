@@ -4,6 +4,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'element-plus/dist/index.css'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import VMdEditor from '@kangc/v-md-editor/lib/codemirror-editor';
 import '@kangc/v-md-editor/lib/style/codemirror-editor.css';
@@ -41,6 +42,10 @@ VMdEditor.use(githubTheme, {
 });
 
 const app = createApp(App);
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+}
 
 app.use(VMdEditor);
 app.use(router,VueAxios,axios);

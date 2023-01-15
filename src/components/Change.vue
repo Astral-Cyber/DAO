@@ -1,6 +1,6 @@
 <template>
   <!--  @save(text，html)回调将参数将上传至服务器-->
-  <v-md-editor v-model="text" height="83.4vh" @save="save"></v-md-editor>
+  <v-md-editor v-model="props.art.content" height="83.4vh" @save="save"></v-md-editor>
   <!--  未设置表单内容检查-->
   <el-dialog
       v-model="dialogFormVisible"
@@ -52,10 +52,17 @@
 </template>
 
 <script setup lang="ts">
-
 import axios from "axios";
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import type {FormInstance, FormRules} from 'element-plus'
+//setup下使用props
+const props = defineProps(['art'])
+//监听变化
+// watch(() => props.chain, (n, o) => {
+//   console.log(n, o);
+// })
+
+const emit=defineEmits()
 
 const dialogFormVisible = ref(false)
 
@@ -66,13 +73,14 @@ const formRef = ref<FormInstance>()
 //在加载时查询数据库分类列表，label设置为opt名称，id设置为opt值
 //循环 <el-option label="Zone one" value="shanghai" /> 提交表单时要判断分类是否存在、同名文章等
 const form = reactive({
-  topic: '',
-  url: '',
-  releaseDate: '',
+  id: props.art.article.id,
+  topic: props.art.article.topic,
+  url: props.art.article.url,
+  releaseDate: props.art.article.releaseDate,
   as: {
-    name: '',
+    name: props.art.article.as.name,
   },
-  intro: '',
+  intro: props.art.article.intro,
 })
 
 const rules = reactive<FormRules>({
@@ -84,13 +92,11 @@ const rules = reactive<FormRules>({
   releaseDate: [{type: 'date', required: true, message: '请选择发布日期', trigger: 'change'}],
 })
 
-let text = '';
-
 let content = '';
 
-function save(text) {
+function save() {
   dialogFormVisible.value = true;
-  content = text;
+  content = props.art.content;
 }
 
 const resetForm = (formEl: FormInstance | undefined) => {
@@ -101,7 +107,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
 function getSorts() {
   axios.get("/admin/allSorts").then(function (res) {
     sorts.value = res.data;
-    console.log(sorts)
   })
 }
 
@@ -113,7 +118,7 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
   form.url = form.topic
   await formEl.validate((valid) => {
     if (valid) {
-      axios.post("/admin/submit", {content, form}).then(function (res) {
+      axios.patch("/admin/change", {content, form}).then(function (res) {
         console.log(res.data)
         alert(res.data)
       });
@@ -123,6 +128,7 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
       console.log('error submit!')
     }
   })
+  emit('finish')
 }
 
 </script>

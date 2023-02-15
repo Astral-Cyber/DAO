@@ -67,7 +67,7 @@ const formRef = ref<FormInstance>()
 //循环 <el-option label="Zone one" value="shanghai" /> 提交表单时要判断分类是否存在、同名文章等
 const form = reactive({
   topic: '',
-  url: '',
+  content: '',
   releaseDate: '',
   as: {
     name: '',
@@ -86,11 +86,9 @@ const rules = reactive<FormRules>({
 
 let text = '';
 
-let content = '';
-
 function save(text) {
   dialogFormVisible.value = true;
-  content = text;
+  form.content = text;
 }
 
 const resetForm = (formEl: FormInstance | undefined) => {
@@ -110,10 +108,9 @@ onMounted(() => {
 })
 
 const onSubmit = async (formEl: FormInstance | undefined) => {
-  form.url = form.topic
   await formEl.validate((valid) => {
     if (valid) {
-      axios.post("/admin/submit", {content, form}).then(function (res) {
+      axios.post("/admin/submit", form).then(function (res) {
         console.log(res.data)
         alert(res.data)
       });

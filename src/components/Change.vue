@@ -1,6 +1,6 @@
 <template>
   <!--  @save(text，html)回调将参数将上传至服务器-->
-  <v-md-editor v-model="props.art.content" height="83.4vh" @save="save"></v-md-editor>
+  <v-md-editor v-model="form.content" height="83.4vh" @save="save"></v-md-editor>
   <!--  未设置表单内容检查-->
   <el-dialog
       v-model="dialogFormVisible"
@@ -75,7 +75,7 @@ const formRef = ref<FormInstance>()
 const form = reactive({
   id: props.art.article.id,
   topic: props.art.article.topic,
-  url: props.art.article.url,
+  content: props.art.article.content,
   releaseDate: props.art.article.releaseDate,
   as: {
     name: props.art.article.as.name,
@@ -92,11 +92,9 @@ const rules = reactive<FormRules>({
   releaseDate: [{type: 'date', required: true, message: '请选择发布日期', trigger: 'change'}],
 })
 
-let content = '';
 
 function save() {
   dialogFormVisible.value = true;
-  content = props.art.content;
 }
 
 const resetForm = (formEl: FormInstance | undefined) => {
@@ -115,10 +113,9 @@ onMounted(() => {
 })
 
 const onSubmit = async (formEl: FormInstance | undefined) => {
-  form.url = form.topic
   await formEl.validate((valid) => {
     if (valid) {
-      axios.patch("/admin/change", {content, form}).then(function (res) {
+      axios.patch("/admin/change", form).then(function (res) {
         console.log(res.data)
         alert(res.data)
       });

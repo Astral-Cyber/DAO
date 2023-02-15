@@ -43,8 +43,7 @@ const editVisible = ref(false)
 const articleList = ref(null)
 
 let toEdit = reactive({
-  article: '',
-  content: '',
+  article: {}
 });
 
 //setup语法糖下需使用reactive绑定，不然子组件无法正常监听值的变化
@@ -66,13 +65,10 @@ const indexMethod = (number) => {
 function edit(art) {
   editVisible.value = true;
   toEdit.article = art;
-  axios.get('/article/' + toEdit.article.url + '.md').then((res) => {
-    toEdit.content = res.data;
-  })
 }
 
 function finish() {
-  editVisible.value=false;
+  editVisible.value = false;
   getAll();
 }
 

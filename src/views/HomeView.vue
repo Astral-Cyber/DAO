@@ -1,19 +1,10 @@
-<template>
-<!--  <el-date-picker-->
-<!--      v-model="value"-->
-<!--      type="date"-->
-<!--      placeholder="Have a nice day~"-->
-<!--  />-->
-<!--  <upload/>-->
-</template>
-
-<script setup>
-// import {ref} from "vue";
-//
-// const value=ref('')
-import Upload from "@/components/Upload.vue";
+<script setup lang="ts">
+import Home from '../components/Home.vue'
 </script>
 
-<style scoped>
+<template>
+  <Home />
+</template>
+<style>
 
 </style>

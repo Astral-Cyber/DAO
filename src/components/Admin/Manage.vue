@@ -1,7 +1,12 @@
-<template>
+<template :key="different">
   <el-table :data="articleList"
             stripe="stripe"
-            style="width: 100%;" max-height="83.4vh">
+            style="width: 100%;
+                background-color: #fff;
+                border-radius: 4px;
+                box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+                height: 83.4vh;"
+            max-height="83.4vh">
     <el-table-column type="index" :index="indexMethod"/>
     <el-table-column prop="releaseDate" label="发布日期" width="150"></el-table-column>
     <el-table-column prop="as.name" label="分类" width="150"></el-table-column>
@@ -30,17 +35,18 @@
   </el-table>
 
   <el-dialog v-model="editVisible" :title="toEdit.article.url" fullscreen="fullscreen" @close="getAll">
-    <Change :art="toEdit" @finish="finish"/>
+    <Change :art="toEdit" @finish="finish" :key="toEdit.article"/>
   </el-dialog>
 </template>
 
 <script setup>
 import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
-import Change from "@/components/Change.vue";
+import Change from "@/components/Admin/Change.vue";
 
 const editVisible = ref(false)
-const articleList = ref(null)
+const different = ref(false)
+const articleList = ref([{}])
 
 let toEdit = reactive({
   article: {}
@@ -49,7 +55,7 @@ let toEdit = reactive({
 //setup语法糖下需使用reactive绑定，不然子组件无法正常监听值的变化
 
 function getAll() {
-  axios.get("api/show").then(function (res) {
+  axios.get("http://" + location.hostname + ":8080/api/show").then(function (res) {
     articleList.value = res.data;
   })
 }
@@ -67,13 +73,12 @@ function edit(art) {
   toEdit.article = art;
 }
 
-function finish() {
+async function finish() {
   editVisible.value = false;
-  getAll();
 }
 
 function confirmDelete(gotId) {
-  axios.delete("/admin/delete", {
+  axios.delete("http://" + location.hostname + ":8080/admin/delete", {
     params: {
       id: gotId,
     }

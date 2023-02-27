@@ -6,12 +6,12 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    z-index: -1"
+    z-index: 1"
                :style="{
-      'background-image': 'url(' + imgApi + ')'
+      'background-image': 'url(https://source.unsplash.com/random/1800x1200/?desktop,wallpeper)'
     }">
       <el-icon :size="40" color="rgba(255,255,255,.7)"
-               style="z-index: 1; position: absolute;bottom: 10vh;right: 49vw">
+               style="z-index: 2; position: absolute;bottom: 10vh;right: 49vw">
         <SortDown/>
       </el-icon>
     </el-header>
@@ -33,7 +33,7 @@
 
           <!-- 文章列表-->
           <div v-for="article in tableData">
-            <el-row @click="$router.push({ name: 'art', params: { url: article.url }})" style="cursor:pointer;">
+            <el-row @click="$router.push({ name: 'art', params: { id: article.id }})" style="cursor:pointer;">
               <el-col :span="24" style="margin-bottom: 20px">
                 <el-card class="articleCard">
                   <el-row>
@@ -41,7 +41,7 @@
                       <h1 style="top: 0; color: #666666;font-weight: bolder;font-size: 20px;
                       word-break:break-all;
                         word-wrap:break-word">{{ article.topic }}</h1>
-                      <div style="height: 150px;">
+                      <div style="height: 100px;">
                         <span style="color: #777777;width:100%;
                         display:block;
                         white-space:pre-wrap;
@@ -88,11 +88,11 @@
 import axios from "axios";
 import {onBeforeMount, onMounted, ref} from "vue";
 
-let imgApi = 'https://api.ixiaowai.cn/gqapi/gqapi.php'
+let imgApi = 'https://source.unsplash.com/random/900x600/?desktop,wallparper'
 const tableData = ref(null)
 
 onBeforeMount(() => {
-  axios.get("api/show").then(function (res) {
+  axios.get("http://"+location.hostname+":8080/api/show").then(function (res) {
     tableData.value = res.data;
   })
 })
@@ -111,9 +111,5 @@ function articleImg(id) {
 </script>
 
 <style scoped>
-@media screen and (max-width: 1070px) {
-  .side {
-    display: none;
-  }
-}
+
 </style>

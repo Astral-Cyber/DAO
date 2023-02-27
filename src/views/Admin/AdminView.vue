@@ -59,11 +59,7 @@
 
 
     <el-main style="margin-top: 50px">
-      <router-view v-slot="{ Component }" style="margin-top: -59px">
-        <transition name="fade" mode="out-in">
-          <component :is="Component"/>
-        </transition>
-      </router-view>
+      <router-view/>
     </el-main>
 
   </el-container>

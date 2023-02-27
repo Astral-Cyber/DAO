@@ -11,7 +11,6 @@
 // import {ref} from "vue";
 //
 // const value=ref('')
-import Upload from "@/components/Admin/Upload.vue";
 </script>
 
 <style scoped>

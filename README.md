@@ -13,4 +13,4 @@ DAO_Blog的前端开源项目，基于Vue + ElementUI
 ### 控制台
 <img width="1612" alt="image" src="https://user-images.githubusercontent.com/33065020/221800759-e5d40143-74f2-41c3-9979-b37d7c7a758a.png">
 
-### One More Thing...
+<p align="center">One More Thing...</p>

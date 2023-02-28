@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
-import MainView from "@/views/MainView.vue";
+import MainView from "@/views/MainFrameView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,7 +36,7 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      component: () => import('../views/Admin/AdminView.vue'),
+      component: () => import('../views/Admin/AdminFrameView.vue'),
       children: [
         {
           path: '',
@@ -55,6 +55,11 @@ const router = createRouter({
           path: 'manage',
           name: 'manage',
           component: () => import('../views/Admin/ManageView.vue')
+        },
+        {
+          path: 'setting',
+          name: 'setting',
+          component: () => import('../views/Admin/Setting.vue')
         }]
     },
   ]

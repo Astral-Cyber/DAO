@@ -2,7 +2,9 @@
   <el-container>
     <el-aside width="200px" style="text-align: center;">
       <el-col>
-        <h1 class="mb-2" style="font-size: x-large;margin: 16px;color: #409EFF;font-style: italic">DashBoard</h1>
+        <h1 class="mb-2"
+            style="font-weight: bolder;font-size: xx-large;margin: 6px 6px 7px 20px;color: #409EFF;font-style: italic">
+          DashBoard</h1>
         <el-menu
             default-active="/admin"
             class="el-menu-vertical-demo"
@@ -12,7 +14,7 @@
           <el-menu-item index="/admin">
             <template #title>
               <el-icon>
-                <Monitor/>
+                <DataLine/>
               </el-icon>
               <span>概览</span>
             </template>
@@ -56,9 +58,11 @@
         </el-menu>
       </el-col>
     </el-aside>
-
-
-    <el-main style="margin-top: 50px">
+    <el-main>
+      <div style="min-height: 50px;float: right;margin-right: 20px;">
+        <el-link :icon="Position" type="primary" style="scale: 110%;margin-left: 15px" @click="$router.push('/')">&af; 主页</el-link>
+        <el-link :icon="SwitchButton" type="danger" style="scale: 110%;margin-left: 15px" @click="location.replace(location.origin+'/logout')">&af; 注销</el-link>
+      </div>
       <router-view/>
     </el-main>
 
@@ -83,6 +87,8 @@
 </template>
 
 <script lang="ts" setup>
+import {Position, SwitchButton} from "@element-plus/icons-vue";
+
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }

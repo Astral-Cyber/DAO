@@ -1,4 +1,4 @@
-# DAO Project —— Front-end
+# DAO Project —— Bolg Front-end
 
 - DAO_Blog的前端开源项目，基于Vue + ElementUI
 
